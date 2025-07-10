@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>My DIY Homepage</title>
+  <!-- Press Start 2P font -->
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <style>
+    /* Base styling */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Press Start 2P', sans-serif;
+      background: #1a001a url('pattern.png') repeat;
+      color: #CC00FF;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Cursor trail canvas */
+    canvas#trail {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* Side GIFs - full height, wider bands */
+    .side-gif {
+      position: fixed;
+      top: 0; bottom: 0;
+      width: 400px;
+      height: 100%;
+      object-fit: cover;
+      z-index: 2;
+      pointer-events: none;
+    }
+    .side-gif.left { left: 0; }
+    .side-gif.right { right: 0; }
+
+    /* Header panel positioned between GIFs */
+    .header-panel {
+      background: #660066;
+      color: #fffb00;
+      position: absolute;
+      top: 0;
+      left: 400px;
+      right: 400px;
+      text-align: center;
+      padding: 2rem 0;
+      font-size: 2rem;
+      text-shadow: 2px 2px 0 #000, -2px -2px 0 #000;
+      z-index: 2;
+    }
+
+    /* Audio controls moved below header */
+    #bgm-controls {
+      margin-top: 8rem;  /* pulled down below header */
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      z-index: 2;
+    }
+    #mute-btn {
+      margin-top: 8rem;  /* align with controls */
+      background: #CC00FF;
+      color: #1a001a;
+      border: none;
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      transition: transform .2s;
+      z-index: 2;
+    }
+    #mute-btn:hover { transform: scale(1.1); }
+
+    /* Spawn button */
+    #spawn-btn {
+      position: fixed;
+      bottom: 20px; left: 50%;
+      transform: translateX(-50%);
+      background: #CC00FF;
+      width: 40px; height: 40px;
+      border: 2px solid #fff;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: transform .2s;
+      z-index: 2;
+    }
+    #spawn-btn:hover { transform: translateX(-50%) scale(1.2); }
+
+    /* Menu grid */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, 150px);
+      grid-template-rows: repeat(2, 150px);
+      gap: 20px;
+      margin-top: 3rem;
+      z-index: 2;
+    }
+    .box {
+      background: #330033;
+      border: 3px dashed #CC00FF;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-decoration: none;
+      color: #CC00FF;
+      font-size: 1rem;
+      transition: transform .2s;
+      z-index: 2;
+    }
+    .box:hover { transform: scale(1.1); }
+  </style>
+</head>
+<body class="admin">
+  <!-- Side GIFs -->
+  <img src="gifs/lavalamp.gif" class="side-gif left" alt="Left GIF">
+  <img src="gifs/lavalamp.gif" class="side-gif right" alt="Right GIF">
+
+  <!-- Header -->
+  <div class="header-panel">Mika van der Aa</div>
+
+  <!-- Audio controls -->
+  <div id="bgm-controls">
+    <audio id="bgm" src="audio/lavaland.mp3" loop autoplay></audio>
+    <label for="bgm">Background Music:</label>
+    <input type="range" id="volume" min="0" max="1" step="0.05" value="0.5">
+  </div>
+  <button id="mute-btn">Mute</button>
+
+  <!-- Spawn effect button and sound -->
+  <button id="spawn-btn"></button>
+  <audio id="spawn-sfx" src="audio/lobotomy.mp3"></audio>
+
+  <!-- Menu grid -->
+  <div class="grid">
+    <a href="portfolio.html" class="box">Portfolio</a>
+    <a href="music.html" class="box">Music</a>
+    <a href="webgame.html" class="box">Webgame</a>
+    <a href="Aboutme.html" class="box">About Me</a>
+  </div>
+
+  <!-- Canvas for cursor trail -->
+  <canvas id="trail"></canvas>
+
+  <script>
+    // Background music volume control
+    const bgm = document.getElementById('bgm');
+    document.getElementById('volume').addEventListener('input', e => bgm.volume = e.target.value);
+
+    // Mute toggle
+    const muteBtn = document.getElementById('mute-btn');
+    muteBtn.addEventListener('click', () => {
+      bgm.muted = !bgm.muted;
+      muteBtn.textContent = bgm.muted ? 'Unmute' : 'Mute';
+    });
+
+    // Spawn lobotomy gif with sound
+    const spawnBtn = document.getElementById('spawn-btn');
+    const spawnSfx = document.getElementById('spawn-sfx');
+    spawnBtn.addEventListener('click', e => {
+      spawnSfx.currentTime = 0; spawnSfx.play();
+      const img = document.createElement('img');
+      img.src = 'pics/lobotomy.png'; img.style.position = 'absolute';
+      const size = 100; img.style.width = size+'px'; img.style.height='auto';
+      img.style.left = Math.random()*(window.innerWidth-size)+'px';
+      img.style.top  = Math.random()*(window.innerHeight-size)+'px';
+      img.style.pointerEvents='none'; img.style.zIndex=2;
+      document.body.appendChild(img);
+    });
+
+    // Cursor trail logic
+    const canvas = document.getElementById('trail'), ctx = canvas.getContext('2d');
+    function resize(){ canvas.width=window.innerWidth; canvas.height=window.innerHeight; }
+    window.addEventListener('resize',resize); resize();
+    let prevX=null, prevY=null;
+    document.addEventListener('mousemove', e=>{
+      if(prevX===null){ prevX=e.clientX; prevY=e.clientY; return; }
+      ctx.beginPath(); ctx.moveTo(prevX, prevY); ctx.lineTo(e.clientX, e.clientY);
+      ctx.strokeStyle='rgba(204,0,255,0.7)'; ctx.lineWidth=2; ctx.stroke(); ctx.closePath();
+      prevX=e.clientX; prevY=e.clientY;
+    });
+    document.addEventListener('mousedown',()=>{ prevX=null; prevY=null; });
+
+    // Explosion effect on click
+    document.addEventListener('click', e=>{
+      const explosion=document.createElement('img');
+      explosion.src='gifs/explosion2.gif';
+      explosion.style.position='absolute';
+      explosion.style.left=(e.clientX-64)+'px'; explosion.style.top=(e.clientY-120)+'px';
+      explosion.style.width='128px'; explosion.style.height='128px'; explosion.style.pointerEvents='none'; explosion.style.zIndex=4;
+      document.body.appendChild(explosion);
+      setTimeout(()=>explosion.remove(),1000);
+    });
+
+    // Admin toggle
+    document.addEventListener('keydown',e=>{ if(e.key==='A') document.body.classList.toggle('admin'); });
+  </script>
+</body>
+</html>

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <title>Mijn Muziekspeler met GIFs</title>
+  <style>
+    body {
+      background: #ff0000 url('pics/texture3.jpg') repeat;
+      color: #0f0;
+      font-family: sans-serif;
+      padding: 2rem;
+      position: relative;
+      min-height: 100vh;
+    }
+    h1 {
+      text-align: center;
+      text-shadow: 1px 1px 0 #000;
+      margin-bottom: 1rem;
+    }
+
+    /* Home-knop styling */
+    .home-link img {
+      width: 150px;
+      height: 150px;
+      cursor: pointer;
+      border-radius: 4px;
+      transition: transform .2s;
+      margin-bottom: 1rem;
+    }
+    .home-link img:hover { transform: scale(1.1); }
+
+    /* Container voor playlist en zijbalken */
+    .music-container {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      margin: 0 auto;
+    }
+    .sidebar {
+      width: 300px;
+      display: flex;
+      flex-direction: column;
+      gap: 75rem;
+    }
+    .sidebar img { width: 100%; }
+
+    /* Playlist sectie - altijd 900px breed */
+    #playlist {
+      width: 900px;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      flex-shrink: 0;
+    }
+    .track {
+      background: #111;
+      padding: 1rem;
+      border: 2px solid #0f0;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .track img {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border: 2px solid #0f0;
+    }
+    .track-details { flex: 1; }
+    .track-details div { margin-bottom: 0.5rem; }
+    .track audio { width: 100%; }
+
+    /* Extra afbeelding styling onder Track 2 */
+    .track-extra-image img {
+      display: block;
+      width: 100%;
+      border: 2px solid #0f0;
+    }
+
+    /* Fire-gifs onderaan */
+    .fire-container {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      pointer-events: none;
+    }
+    .fire-container img {
+      width: 1200px;
+      height: 150px;
+      opacity: 0.8;
+    }
+  </style>
+</head>
+<body>
+  <!-- Background music when no track plays -->
+  <audio id="bgm" src="audio/creepy.mp3" loop autoplay></audio>
+
+  <!-- Return to homepage -->
+  <a href="index.html" class="home-link">
+    <img src="pics/heisenberg.png" alt="Ga terug naar Home">
+  </a>
+
+  <h1>???Music???</h1>
+
+  <div class="music-container">
+    <div class="sidebar">
+      <img src="gifs/devil.gif" alt="Linker GIF 1">
+      <img src="gifs/alien.gif" alt="Linker GIF 2">
+    </div>
+
+    <div id="playlist">
+      <div class="track">
+        <img src="gifs/giffemurbreaker.gif" alt="Gif bij Track 1">
+        <div class="track-details">
+          <div>1. Track 1 – XFemurbreaker9000X</div>
+          <audio controls class="track-audio">
+            <source src="audio/track1.mp3" type="audio/mpeg">
+          </audio>
+        </div>
+      </div>
+
+      <div class="track">
+        <img src="gifs/giffemurbreaker.gif" alt="Gif bij Track 2">
+        <div class="track-details">
+          <div>2. Track 2 – Jensch</div>
+          <audio controls class="track-audio">
+            <source src="audio/Jensch.mp3" type="audio/mpeg">
+          </audio>
+        </div>
+      </div>
+
+      <div class="track-extra-image">
+        <img src="pics/bluntforce.jpg" alt="Extra afbeelding onder Track 2">
+      </div>
+
+      <div class="track">
+        <img src="gifs/giffemurbreaker.gif" alt="Gif bij Track 3">
+        <div class="track-details">
+          <div>3. Track 3 – Bluntforce</div>
+          <audio controls class="track-audio">
+            <source src="audio/bluntforce.mp3" type="audio/mpeg">
+          </audio>
+        </div>
+      </div>
+
+      <!-- Extra Track 4 -->
+      <div class="track">
+        <img src="gifs/eye.gif" alt="Gif bij Track 4">
+        <div class="track-details">
+          <div>4. Track 4 – Nieuwe Track</div>
+          <audio controls class="track-audio">
+            <source src="audio/music.mp3" type="audio/mpeg">
+          </audio>
+        </div>
+      </div>
+    </div>
+
+    <div class="sidebar">
+      <img src="gifs/devil.gif" alt="Rechter GIF 1">
+      <img src="gifs/alien.gif" alt="Rechter GIF 2">
+    </div>
+  </div>
+
+  <div class="fire-container">
+    <img src="gifs/fire.gif" alt="Brandende GIF 1">
+    <img src="gifs/fire.gif" alt="Brandende GIF 2">
+    <img src="gifs/fire.gif" alt="Brandende GIF 3">
+  </div>
+
+  <script>
+    const bgm = document.getElementById('bgm');
+    const tracks = document.querySelectorAll('.track-audio');
+    tracks.forEach(audio => {
+      audio.addEventListener('play', () => bgm.pause());
+      audio.addEventListener('pause', () => setTimeout(() => {
+        if (![...tracks].some(a => !a.paused)) bgm.play();
+      }, 100));
+      audio.addEventListener('ended', () => {
+        if (![...tracks].some(a => !a.paused)) bgm.play();
+      });
+    });
+  </script>
+</body>
+</html>

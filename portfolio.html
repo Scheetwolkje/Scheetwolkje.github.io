@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Portfolio - Mika van der Aa</title>
+  <!-- Vintage Web-Safe Fonts -->
+  <style>
+    /* Reset */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background-color: #ffffff;
+      background-image: url("pics/water.jpg");
+      background-repeat: repeat;
+      background-position: top left;
+      background-attachment: fixed;
+      font-family: Verdana, Arial, sans-serif;
+      color: #000000;
+      text-align: center;
+    }
+    /* Header */
+    .header {
+      background: #00ff00;
+      color: #000000;
+      padding: 10px;
+      border-bottom: 4px double #0000ff;
+      font-family: 'Courier New', monospace;
+      font-size: 2rem;
+      text-shadow: 1px 1px #00aa00;
+      animation: header-glow 2s ease-in-out infinite alternate;
+    }
+    @keyframes header-glow {
+      from { text-shadow: 1px 1px #00aa00; }
+      to   { text-shadow: 2px 2px #0000ff; }
+    }
+
+    /* Sidebars */
+    .sidebar {
+      position: fixed;
+      top: 60px;
+      width: 150px;
+      height: calc(100% - 60px);
+      background: #000000;
+      border: 3px solid #00ff00;
+      overflow-y: auto;
+    }
+    .sidebar.left { left: 0; }
+    .sidebar.right { right: 0; }
+    .sidebar img { width: 100%; margin: 10px 0; }
+
+    /* Content */
+    .content {
+      margin: 80px 170px 40px;
+    }
+    h1 {
+      font-family: Georgia, serif;
+      font-size: 2.2rem;
+      color: #0000ff;
+      margin-bottom: 20px;
+      text-decoration: underline wavy #00ff00;
+    }
+
+    /* Portfolio sections */
+    .section {
+      background: #e0ffe0;
+      border: 3px ridge #0000ff;
+      padding: 15px;
+      margin-bottom: 20px;
+      border-radius: 10px;
+      box-shadow: 5px 5px 0 #00aa00;
+      position: relative;
+    }
+    .section img {
+      max-width: 600px;
+      width: 100%;
+      height: auto;
+      border: 4px solid #0000ff;
+      margin: 0 auto 8px;
+      display: block;
+    }
+    .multi-img {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 8px;
+    }
+    .multi-img img {
+      max-width: 30%;
+      height: auto;
+      border: 4px solid #0000ff;
+    }
+    .section p {
+      font-family: Tahoma, Geneva, sans-serif;
+      font-size: 0.9rem;
+      color: #003300;
+      margin-top: 5px;
+    }
+
+    /* Blinking marquee */
+    .blink-marquee {
+      font-family: 'Courier New', monospace;
+      color: #0000ff;
+      font-size: 1rem;
+      margin: 10px 0;
+    }
+
+    /* Footer */
+    .footer {
+      background: #00ff00;
+      color: #000000;
+      padding: 10px;
+      border-top: 4px double #0000ff;
+      font-family: Verdana, Arial, sans-serif;
+      position: relative;
+    }
+
+    /* Audio controls */
+    #bgm { display: none; }
+    #mute-btn {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: #0099ff;
+      color: #fff;
+      border: 2px outset #0066cc;
+      padding: 8px 12px;
+      border-radius: 10px;
+      font-family: Verdana, sans-serif;
+      cursor: pointer;
+      text-shadow: 1px 1px #000;
+      z-index: 1000;
+    }
+    #mute-btn:hover { background: #00ccff; }
+    #track-select {
+      position: fixed;
+      top: 20px;
+      right: 100px;
+      padding: 6px;
+      border: 2px inset #0066cc;
+      border-radius: 6px;
+      font-family: Verdana, sans-serif;
+      z-index: 1000;
+    }
+  </style>
+</head>
+<body>
+  <!-- Music Player with track selection -->
+  <audio id="bgm" loop autoplay>
+    <source src="audio/Super Mario 64 - Dire Dire Docks  Jolly Roger Bay Music.mp3" type="audio/mp3">
+  </audio>
+  <button id="mute-btn">Mute</button>
+  <select id="track-select">
+    <option value="audio/Super Mario 64 - Dire Dire Docks  Jolly Roger Bay Music.mp3">Track 1 mario</option>
+    <option value="audio/Blinding Ignorance.mp3">Track 2 torture- blinding ignorance</option>
+    <option value="audio/Death Grips - Beware.mp3">Track 3 death grips - beware</option>
+  </select>
+
+  <div class="header">Mika van der Aa's Portfolio</div>
+  <marquee class="blink-marquee" behavior="alternate" scrollamount="4"><<< Scroll down for epic pics & vids! >>></marquee>
+
+  <div class="sidebar left">
+    <img src="gifs/smilley.gif" alt="Neon GIF">
+    <img src="gifs/download2.gif" alt="Neon GIF">
+    <img src="gifs/smiley3.gif" alt="Neon GIF">
+    <img src="gifs/download.gif" alt="Neon GIF">
+  </div>
+  <div class="sidebar right">
+    <img src="gifs/smilley.gif" alt="Neon GIF">
+    <img src="gifs/download2.gif" alt="Neon GIF">
+    <img src="gifs/smiley3.gif" alt="Neon GIF">
+    <img src="gifs/download.gif" alt="Neon GIF">
+  </div>
+
+  <div class="content">
+    <h1>My Portfolio Gallery</h1>
+
+    <!-- 10 Photos with captions -->
+    <div class="section">
+      <img src="pics/bees.jpg" alt="Photo 1">
+      <p>[1] Zelfgemaakt bijenhotel, met verschillende gatgroottes en dieptes voor verschillende inheemse metselbijen.</p>
+    </div>
+    <div class="section">
+      <img src="pics/pots.jpg" alt="Photo 2">
+      <p>[2] zelfgemaakte draaischijf van een oud afgedankt hoverboard, waarmee ik verschillende potten met luchtdrogende klei heb gedraaid.</p>
+    </div>
+    <div class="section">
+      <img src="pics/drone.jpg" alt="Photo 3">
+      <p>[3] In groepsverband ontworpen drone die met behullp van een ai camera en een landingssysteem met grijper, afvall kan detecteren,oppakken en opruimen. Gebouwd tijdens de drone challinge in de bic (brainport campus) in Eindhoven.</p>
+    </div>
+    <div class="section">
+      <div class="multi-img">
+        <img src="pics/labview.jpg" alt="Photo 4a">
+        <img src="pics/labview1.jpg" alt="Photo 4b">
+        <img src="pics/labview3.jpg" alt="Photo 4c">
+      </div>
+      <p>[4a-c] Zelfgeschreven proogramma in de grafische programmeertaal labview, die waardes per pixel in png en jpeg bestanden kan aanpassen, wat to vreemde effecten leidt.</p>
+    </div>
+    <div class="section">
+      <img src="pics/roboticarm.jpg" alt="Photo 5">
+      <p>[5] robotarm die ik in grooepsverband heb gemaakt. De arm, werd op een autotje gemonteerd wat mety behulp van sensoren een bepaald parcour moest afleggen, waarbij het objecten kon oppakken en verplaatsen.</p>
+    </div>
+    <div class="section">
+      <img src="pics/pcb.jpg" alt="Photo 6">
+      <p>zelf ontworpen metaaldetector sensoren, die in code gekoppeld konden worden om een conveyer line te checken en lengtes en breedtes te meten van een metalen object</p>
+    </div>
+    <div class="section">
+      <img src="pics/plectrum.jpg" alt="Photo 7">
+      <p>[7] zelfontworpen plectrum gebaseerd op de jazz3, maar dan speelbaar aan 3 kanten ,met toegevoegde grip</p>
+    </div>
+    <div class="section">
+      <img src="pics/airplant.jpg" alt="Photo 8">
+      <p>[8] airplant holder speciaal gemaakt voor de ikea skadis</p>
+    </div>
+    <div class="section">
+      <div class="multi-img">
+        <img src="pics/muscle cultivator.jpg" alt="Photo 9a">
+        <img src="pics/gripper part 1.jpg" alt="Photo 9b">
+        <img src="pics/gripper part 2.jpg" alt="Photo 9c">
+      </div>
+      <p>[9a-c] nog wat dingetjes</p>
+    </div>
+    <div class="section">
+      <div class="multi-img">
+        <img src="pics/snail.jpg" alt="Photo 10a">
+        <img src="pics/random sketch.jpg" alt="Photo 10b">
+        <img src="pics/tree.jpg" alt="Photo 10c">
+      </div>
+      <p>[10a-c] nog wat random dingetjes</p>
+    </div>
+
+   
+
+  <div class="footer">
+    <p>&copy; 2025 Mika van der Aa. All Rights Reserved.</p>
+    <p><a href="index.html">&laquo; Back to Home</a></p>
+  </div>
+
+  <script>
+    const bgm = document.getElementById('bgm');
+    const muteBtn = document.getElementById('mute-btn');
+    const trackSelect = document.getElementById('track-select');
+    muteBtn.addEventListener('click', () => {
+      bgm.muted = !bgm.muted;
+      muteBtn.textContent = bgm.muted ? 'Unmute' : 'Mute';
+    });
+    trackSelect.addEventListener('change', () => {
+      bgm.src = trackSelect.value;
+      bgm.play();
+    });
+  </script>
+</body>
+</html>
