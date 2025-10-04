@@ -40,7 +40,7 @@
       width: 300px;
       display: flex;
       flex-direction: column;
-      gap: 75rem;
+      gap: 1rem; /* Adjusted gap to make all GIFs visible */
     }
     .sidebar img { width: 100%; }
 
@@ -71,6 +71,10 @@
     .track audio { width: 100%; }
 
     /* Extra afbeelding styling onder Track 2 */
+    .track-extra-image {
+        margin-bottom: 2rem; /* Added margin to match gap */
+    }
+
     .track-extra-image img {
       display: block;
       width: 100%;
@@ -95,10 +99,8 @@
   </style>
 </head>
 <body>
-  <!-- Background music when no track plays -->
   <audio id="bgm" src="audio/creepy.mp3" loop autoplay></audio>
 
-  <!-- Return to homepage -->
   <a href="index.html" class="home-link">
     <img src="pics/heisenberg.png" alt="Ga terug naar Home">
   </a>
@@ -109,6 +111,12 @@
     <div class="sidebar">
       <img src="gifs/devil.gif" alt="Linker GIF 1">
       <img src="gifs/alien.gif" alt="Linker GIF 2">
+      <img src="gifs/devil.gif" alt="Linker GIF 3">
+      <img src="gifs/alien.gif" alt="Linker GIF 4">
+      <img src="gifs/devil.gif" alt="Linker GIF 5">
+      <img src="gifs/alien.gif" alt="Linker GIF 6">
+      <img src="gifs/devil.gif" alt="Linker GIF 7">
+      <img src="gifs/alien.gif" alt="Linker GIF 8">
     </div>
 
     <div id="playlist">
@@ -135,7 +143,7 @@
       <div class="track-extra-image">
         <img src="pics/bluntforce.jpg" alt="Extra afbeelding onder Track 2">
       </div>
-
+      
       <div class="track">
         <img src="gifs/giffemurbreaker.gif" alt="Gif bij Track 3">
         <div class="track-details">
@@ -145,22 +153,68 @@
           </audio>
         </div>
       </div>
-
-      <!-- Extra Track 4 -->
+      
       <div class="track">
         <img src="gifs/eye.gif" alt="Gif bij Track 4">
         <div class="track-details">
-          <div>4. Track 4 – Nieuwe Track</div>
+          <div>4. Track 4 –  grindcore? </div>
           <audio controls class="track-audio">
             <source src="audio/music.mp3" type="audio/mpeg">
           </audio>
         </div>
       </div>
+
+      <div class="track">
+        <img src="gifs/eye.gif" alt="Gif bij Track 5">
+        <div class="track-details">
+          <div>5. Track 5 – CHECK DEZE VOOR DE MINOR</div>
+          <audio controls class="track-audio">
+            <source src="audio/schooldingmetsamples.mp3" type="audio/mpeg">
+          </audio>
+        </div>
+      </div>
+
+      <div class="track">
+        <img src="gifs/eye.gif" alt="Gif bij Track 6">
+        <div class="track-details">
+          <div>6. Track 6 – videogame1</div>
+          <audio controls class="track-audio">
+            <source src="audio/leipeanus.mp3" type="audio/mpeg">
+          </audio>
+        </div>
+      </div>
+
+      <div class="track">
+        <img src="gifs/eye.gif" alt="Gif bij Track 7">
+        <div class="track-details">
+          <div>7. Track 7 – videogame 2</div>
+          <audio controls class="track-audio">
+            <source src="audio/gamestannie.mp3" type="audio/mpeg">
+          </audio>
+        </div>
+      </div>
+
+      <div class="track">
+        <img src="gifs/eye.gif" alt="Gif bij Track 8">
+        <div class="track-details">
+          <div>8. Track 8 – Goonforce</div>
+          <audio controls class="track-audio">
+            <source src="audio/Goonforce.mp3" type="audio/mpeg">
+          </audio>
+        </div>
+      </div>
+
     </div>
 
     <div class="sidebar">
       <img src="gifs/devil.gif" alt="Rechter GIF 1">
       <img src="gifs/alien.gif" alt="Rechter GIF 2">
+      <img src="gifs/devil.gif" alt="Rechter GIF 3">
+      <img src="gifs/alien.gif" alt="Rechter GIF 4">
+      <img src="gifs/devil.gif" alt="Rechter GIF 5">
+      <img src="gifs/alien.gif" alt="Rechter GIF 6">
+      <img src="gifs/devil.gif" alt="Rechter GIF 7">
+      <img src="gifs/alien.gif" alt="Rechter GIF 8">
     </div>
   </div>
 
